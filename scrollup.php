@@ -7,7 +7,7 @@ $thisfile=basename(__FILE__, ".php");
 register_plugin(
 	$thisfile, //Plugin id
 	'scrollup plugin', 	//Plugin name
-	'1.0', 		//Plugin version
+	'2.0', 		//Plugin version
 	'Matuesz Skrzypczak',  //Plugin author
 	'https://paypal.me/multicol0r', //author website
 	'This plugin add ScrollUp button to your website', //Plugin description

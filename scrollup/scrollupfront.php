@@ -7,13 +7,14 @@ global $SITEURL;
 
 ?>
 
+
 <style>
 html,body{
     scroll-behavior: smooth;
 }
 .scrollup{
     position: fixed;
-    z-index: 88;
+    z-index: 999;
     bottom: 10px;
     right:10px;
     background: <?php echo $data->scrollupcolor;?>;
@@ -26,7 +27,8 @@ html,body{
     justify-content: center;
     transition: all 250ms linear;
   transform: translate(100px,0);
-  <?php echo $data->border;?>
+  <?php echo $data->border;?>;
+  <?php echo $data->radius;?>
 }
 
 .scrollup:hover{

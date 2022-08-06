@@ -7,17 +7,21 @@ global $SITEURL;
 
     ;?>
 
-<form method="post">
+
+<h3>scrollUp Settings</h3>
+
+<form method="post" style="background: #fafafa;
+border: solid 1px #ddd; padding:10px; width:100%;box-sizing:border-box;margin-bottom:10px;">
 
 <p style="margin:10px 0;">scrollup color</p>
 
-<input type="color" class="color-select" value="<?php echo $data->color;?>" style="width:100%;height:40px;background:#fafafaf;border:solid 1px #ddd;" name ="color">
+<input type="color" class="color-select" value="<?php echo $data->color;?>" style="width:100%;height:40px;background:#fff;border:solid 1px #ddd;" name ="color">
 
  
 
 <p style="margin:10px 0;">scrollup size</p>
 
-<select name="size" class="size-select" style="width:100%;padding:10px;background:#fafafaf;border:solid 1px #ddd;">
+<select name="size" class="size-select" style="width:100%;padding:10px;background:#fff;border:solid 1px #ddd;">
 
 <option value="40"  <?php if(file_exists($filename)){ echo  $data->scrollupsize==="40"?"selected":"";};?> >40px</option>
 <option value="50" <?php if(file_exists($filename)){ echo $data->scrollupsize==="50"?"selected":"";};?> >50px</option>
@@ -31,7 +35,7 @@ global $SITEURL;
 
 <p style="margin:10px 0;"> Choose icon</p>
 
-<select name="icon" class="icon-select" style="width:100%;padding:10px;background:#fafafaf;border:solid 1px #ddd;">
+<select name="icon" class="icon-select" style="width:100%;padding:10px;background:#fff;border:solid 1px #ddd;">
 
 <option value="1"  >Type 1</option>
 <option value="2"  >Type 2</option>
@@ -115,7 +119,7 @@ global $SITEURL;
 <br>
 <p style="margin:10px 0;"> Invert color icon</p>
 
-<select name="invert" class="invert-select" style="width:100%;padding:10px;background:#fafafaf;border:solid 1px #ddd;">
+<select name="invert" class="invert-select" style="width:100%;padding:10px;background:#fff;border:solid 1px #ddd;">
 
 <option value="100%" <?php if(file_exists($filename)){echo $data->invert==="100%"?"selected":"";};?> >Yes</option>
 <option value="0"  <?php if(file_exists($filename)){ echo $data->invert==="0"?"selected":"";};?> >No</option>
@@ -125,7 +129,7 @@ global $SITEURL;
 <br>
 
 <p style="margin:10px 0;">Border</p>
-<select name="border" class="border-select" style="width:100%;padding:10px;background:#fafafaf;border:solid 1px #ddd;">
+<select name="border" class="border-select" style="width:100%;padding:10px;background:#fff;border:solid 1px #ddd;">
 
 <option value="border:solid 1px #000"  <?php if(file_exists($filename)){ echo $data->border==="border:solid 1px #000"?"selected":"";};?> >Border dark</option>
 <option value="border:solid 1px #fff"  <?php if(file_exists($filename)){echo $data->border==="border:solid 1px #fff"?"selected":"";};?> >Border light</option>
@@ -134,10 +138,24 @@ global $SITEURL;
 </select>
 
 
+
+
+<p style="margin:10px 0;">Border radius</p>
+<select name="radius" class="radius-select" style="width:100%;padding:10px;background:#fff;border:solid 1px #ddd;">
+
+<option value="border-radius:0"  <?php if(file_exists($filename)){ echo $data->radius==="border-radius:0"?"selected":"";};?> >Border radius none</option>
+<option value="border-radius:5%"  <?php if(file_exists($filename)){ echo $data->radius==="border-radius:5%"?"selected":"";};?> >Border radius 5%</option>
+<option value="border-radius:10%"  <?php if(file_exists($filename)){echo $data->radius==="border-radius:10%"?"selected":"";};?> >Border radius 10%</option>
+<option value="border-radius:50%" <?php if(file_exists($filename)){ echo $data->radius==="border-radius:50%"?"selected":"";};?> >Border radius 50%</option>
+
+</select>
+
+
+
 <br>
 <p style="margin:10px 0;"> Show on mobile</p>
 
-<select name="mobile" class="mobile-select" style="width:100%;padding:10px;background:#fafafaf;border:solid 1px #ddd;">
+<select name="mobile" class="mobile-select" style="width:100%;padding:10px;background:#fff;border:solid 1px #ddd;">
 
 <option value="flex"  <?php if(file_exists($filename)){echo  $data->mobile==="flex"?"selected":"";};?> >Yes</option>
 <option value="none"  <?php if(file_exists($filename)){echo  $data->mobile==="none"?"selected":"";};?> >No</option>
@@ -145,7 +163,10 @@ global $SITEURL;
 </select>
 
 
-<input type="submit" name="submit" value="Save settings" style="background:#000;color:#fff;padding:10px 15px;margin-top:20px;margin-bottom:20px;border:none;border-radius:5%;">
+
+
+
+<input type="submit" name="submit" value="Save settings" style="background:#000;width:100%;color:#fff;padding:10px 15px;margin-top:20px;margin-bottom:20px;border:none;border-radius:5%;">
 
 </form>
 
@@ -174,6 +195,7 @@ $scripter .= 'document.querySelector(".mobile-select").value = "'.$data->mobile.
 $scripter .= 'document.querySelector(".border-select").value = "'.$data->border.'";';
 $scripter .= 'document.querySelector(".size-select").value = "'.$data->scrollupsize.'";';
 $scripter .= 'document.querySelector(".color-select").value = "'.$data->scrollupcolor.'";';
+$scripter .= 'document.querySelector(".radius-select").value = "'.$data->radius.'";';
 
 $scripter .='</script>';
 
@@ -199,6 +221,7 @@ if (isset($_POST['submit'])){
     $invert = $_POST['invert'];
     $border = $_POST['border'];
     $mobile = $_POST['mobile'];
+    $radius = $_POST['radius'];
   
      
     $jsonsettings = '{
@@ -207,7 +230,8 @@ if (isset($_POST['submit'])){
         "icon" : "'.$icon.'",
         "invert" : "'.$invert.'",
         "border" : "'.$border.'",
-        "mobile" : "'.$mobile.'"
+        "mobile" : "'.$mobile.'",
+        "radius" : "'.$radius.'"
     }';
      
      
